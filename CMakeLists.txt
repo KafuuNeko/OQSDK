@@ -21,4 +21,7 @@ set(CMAKE_SHARED_LINKER_FLAGS "-static -Wl,--kill-at,--enable-stdcall-fixup")
 
 aux_source_directory(./src/example DIR_TOOT_SRCS)
 
+
 add_library(Example SHARED ${DIR_TOOT_SRCS})
+set_target_properties(Example PROPERTIES PREFIX "") # 去除 lib 前缀
+set_target_properties(Example PROPERTIES SUFFIX ".OQ.dll") # 添加后缀

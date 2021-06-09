@@ -47,6 +47,7 @@ OQ_MESSAGE {
 OQ_Event {
     if(type == 1) {
         kOnoApi.send_msg(botQQ, type, " ", msgFrom, content, -1);
+        kOnoApi.send_msg(botQQ, type, " ", msgFrom, "OnoQQ C++ SDK", -1);
     }
     return Dispose::Continue;
 }
