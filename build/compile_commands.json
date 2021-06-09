@@ -1,7 +1,0 @@
-[
-{
-  "directory": "C:/Users/kafuu/Desktop/OQSDK/build",
-  "command": "C:\\mingw64\\bin\\g++.exe -DExample_EXPORTS -DWIN32 @CMakeFiles/Example.dir/includes_CXX.rsp -m32 -fexec-charset=GBK -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles\\Example.dir\\src\\example\\example.cc.obj -c C:\\Users\\kafuu\\Desktop\\OQSDK\\src\\example\\example.cc",
-  "file": "C:/Users/kafuu/Desktop/OQSDK/src/example/example.cc"
-}
-]

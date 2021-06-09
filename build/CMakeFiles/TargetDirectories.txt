@@ -1,3 +1,0 @@
-C:/Users/kafuu/Desktop/OQSDK/build/CMakeFiles/Example.dir
-C:/Users/kafuu/Desktop/OQSDK/build/CMakeFiles/edit_cache.dir
-C:/Users/kafuu/Desktop/OQSDK/build/CMakeFiles/rebuild_cache.dir
