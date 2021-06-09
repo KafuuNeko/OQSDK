@@ -1,5 +1,6 @@
 #include "example.hpp"
 #include <vector>
+#include <sstream>
 
 ono::api kOnoApi {};
 
@@ -46,8 +47,22 @@ OQ_MESSAGE {
  */
 OQ_Event {
     if(type == 1) {
-        kOnoApi.send_msg(botQQ, type, " ", msgFrom, content, -1);
-        kOnoApi.send_msg(botQQ, type, " ", msgFrom, "OnoQQ C++ SDK", -1);
+        auto index = kmp::find(content, "计算");
+        if(index != kmp::npos) 
+        {
+            double result = 0;
+            if(rpn::calculate(rpn::make(content + index), result))
+            {
+                std::stringstream ss {};
+                ss << "计算结果：" << result;
+                
+                kOnoApi.send_msg(botQQ, type, " ", msgFrom, ss.str(), -1);
+            }
+            else
+            {
+                kOnoApi.send_msg(botQQ, type, " ", msgFrom, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
+            }
+        }
     }
     return Dispose::Continue;
 }
