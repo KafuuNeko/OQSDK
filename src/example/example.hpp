@@ -2,5 +2,5 @@
 
 #include "../oqsdk/include/oqsdk.hpp"
 
-extern OqApi oq;
+extern ono::api kOnoApi;
 

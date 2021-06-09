@@ -1,13 +1,13 @@
 #include "example.hpp"
 #include <vector>
 
-OqApi oq {};
+ono::api kOnoApi {};
 
 INIT {
-    oq.init();
+    kOnoApi.init();
     return MAKE_PLUGIN_INFO(
             Example, //插件名称
-            1.0.0, //插件版本
+            1:0:0, //插件版本
             KafuuNeko, //插件作者
             OQSDK C++ SDK, //插件说明
             8956RTEWDFG3216598WERDF3, //Skey 
@@ -46,7 +46,7 @@ OQ_MESSAGE {
  */
 OQ_Event {
     if(type == 1) {
-        oq.send_msg(botQQ, type, " ", msgFrom, content, -1);
+        kOnoApi.send_msg(botQQ, type, " ", msgFrom, content, -1);
     }
     return Dispose::Continue;
 }
