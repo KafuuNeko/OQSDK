@@ -27,7 +27,7 @@
 
 #define OQ_Event _OQ_EVENT(ono::Dispose, OQ_Event, 48)(\
     const char * botQQ, \
-    int32_t type, \
+    ono::MessageEvent type, \
     int32_t subType, \
     const char *msgFrom, \
     const char *iTObj, \

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "inc_std.hpp"
+#include "type.hpp"
 
 namespace ono
 {

@@ -1,6 +1,6 @@
 #include "example.hpp"
 
-using ono::Dispose;
+using namespace ono;
 
 INIT {
     __PLUGIN_INIT__
@@ -31,7 +31,7 @@ OQ_MESSAGE {
 /**
  * @brief 此子程序会分发OQ_机器人QQ接收到的所有：事件，消息；您可在此函数中自行调用所有参数
  * @param botQQ 用于判定哪个QQ接收到该消息
- * @param type 接收到消息类型，该类型可在常量表中查询具体定义，此处仅列举： -1 未定义事件 0,在线状态临时会话 1,好友信息 2,群信息 3,讨论组信息 4,群临时会话 5,讨论组临时会话 6,财付通转账 7,好友验证回复会话
+ * @param type @see ono::MessageEvent
  * @param subType 此参数在不同OQ_下，有不同的定义，暂定：接收财付通转账时 1待确认收款 0为已收款    有人请求入群时，不良成员这里为1
  * @param msgFrom 此消息的来源，如：群号、讨论组ID、临时会话QQ、好友QQ等
  * @param iTObj 主动发送这条消息的QQ，踢人时为踢人管理员QQ
@@ -46,19 +46,19 @@ OQ_MESSAGE {
 OQ_Event {
     ono::raw::Api_OutPutLog("C++SDK");
 
-    if(ono::raw::Api_IsEnable() && type == 1) {
+    if(ono::raw::Api_IsEnable() && type == MessageEvent::Friend) {
         auto index = kmp::find(content, "计算");
         if(index != kmp::npos) 
         {
             double result = 0;
             if(rpn::calculate(rpn::make(content + index), result))
             {
-                auto send = std::string("测试计算结果：") + std::to_string(result);
-                ono::raw::Api_SendMsg(botQQ, type, msgFrom, iTObj, send.c_str(), -1);
+                auto send = std::string("Ono测试计算结果：") + std::to_string(result);
+                ono::raw::Api_SendMsg(botQQ, MessageEvent::Friend, msgFrom, iTObj, send.c_str(), -1);
             }
             else
             {
-                ono::raw::Api_SendMsg(botQQ, type, msgFrom, iTObj, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
+                ono::raw::Api_SendMsg(botQQ, MessageEvent::Friend, msgFrom, iTObj, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
             }
         }
     }

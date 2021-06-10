@@ -1,8 +1,8 @@
 
 OQApi(bool, IsEnable);
 OQApi(void, OutPutLog, const char *);
-OQApi(void, SendMsg, const char *, int32_t, const char *, const char *, const char *, int32_t);
-OQApi(void, SendMsgEx, const char *, int32_t, int32_t, const char *, const char *, const char *, int32_t);
+OQApi(void, SendMsg, const char *, ono::MessageEvent, const char *, const char *, const char *, int32_t);
+OQApi(void, SendMsgEx, const char *, int32_t, ono::MessageEvent, const char *, const char *, const char *, int32_t);
 OQApi(void, SendXML, const char *, int32_t, int32_t, const char *, const char *, const char *, int32_t);
 OQApi(void, SendJSON, const char *, int32_t, int32_t, const char *, const char *, const char *);
 OQApi(void, SendJsonEx, const char *, int32_t, int32_t, const char *, const char *, const char *, int32_t);
