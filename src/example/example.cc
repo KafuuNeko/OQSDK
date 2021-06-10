@@ -4,6 +4,7 @@
 
 INIT {
     ono::_init_api();
+
     return MAKE_PLUGIN_INFO(
             Example, //插件名称
             1:0:0, //插件版本
@@ -44,6 +45,8 @@ OQ_MESSAGE {
  * @param callback 此参数用于插件加载拒绝理由  用法：写到内存（“拒绝理由”，OQ_信息回传文本指针_Out）
  */
 OQ_Event {
+    ono::raw::Api_OutPutLog("C++SDK");
+
     if(ono::raw::Api_IsEnable() && type == 1) {
         auto index = kmp::find(content, "计算");
         if(index != kmp::npos) 
@@ -52,6 +55,7 @@ OQ_Event {
             if(rpn::calculate(rpn::make(content + index), result))
             {
                 std::stringstream ss {};
+                ss << ono::raw::Api_GetQQList() << "\r\n";
                 ss << "~~计算结果：" << result;
                 
                 ono::raw::Api_SendMsg(botQQ, type, " ", msgFrom, ss.str().c_str(), -1);
