@@ -16,6 +16,10 @@ namespace ono
         #include "./api_funcs.inc"
 
         #undef OQApi
+
+        static const char * (__stdcall *Api_TeaEncrypt)(const char *, const char *) = nullptr;
+        static const char * (__stdcall *Api_TeaDecode)(const char *, const char *)  = nullptr;
+
     }
 
     void _init_api()
@@ -27,6 +31,9 @@ namespace ono
         #include "./api_funcs.inc"
         
         #undef OQApi
+
+        raw::Api_TeaEncrypt = reinterpret_cast<decltype(raw::Api_TeaEncrypt)>(GetProcAddress(dll, "Api_Tea加密"));
+        raw::Api_TeaDecode  = reinterpret_cast<decltype(raw::Api_TeaEncrypt)>(GetProcAddress(dll, "Api_Tea解密"));
     }
 
 }
