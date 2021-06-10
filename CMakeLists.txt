@@ -24,7 +24,8 @@ add_subdirectory(./src/oqsdk)
 aux_source_directory(./src/example DIR_SRCS)
 add_library(Example SHARED ${DIR_SRCS})
 
-target_link_libraries(Example PUBLIC OQSDK)
+target_link_libraries(Example PUBLIC OQSDK_Utils)
+target_link_libraries(Example PUBLIC OQSDK_Core)
 
 set_target_properties(Example PROPERTIES PREFIX "") # 去除 lib 前缀
 set_target_properties(Example PROPERTIES SUFFIX ".OQ.dll") # 添加后缀

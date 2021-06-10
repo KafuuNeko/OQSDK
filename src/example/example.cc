@@ -1,10 +1,9 @@
 #include "example.hpp"
-#include <vector>
-#include <sstream>
+
+using ono::Dispose;
 
 INIT {
-    ono::_init_api();
-
+    __PLUGIN_INIT__
     return MAKE_PLUGIN_INFO(
             Example, //插件名称
             1:0:0, //插件版本
@@ -54,15 +53,12 @@ OQ_Event {
             double result = 0;
             if(rpn::calculate(rpn::make(content + index), result))
             {
-                std::stringstream ss {};
-                ss << ono::raw::Api_GetQQList() << "\r\n";
-                ss << "~~计算结果：" << result;
-                
-                ono::raw::Api_SendMsg(botQQ, type, " ", msgFrom, ss.str().c_str(), -1);
+                auto send = std::string("测试计算结果：") + std::to_string(result);
+                ono::raw::Api_SendMsg(botQQ, type, msgFrom, iTObj, send.c_str(), -1);
             }
             else
             {
-                ono::raw::Api_SendMsg(botQQ, type, " ", msgFrom, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
+                ono::raw::Api_SendMsg(botQQ, type, msgFrom, iTObj, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
             }
         }
     }
