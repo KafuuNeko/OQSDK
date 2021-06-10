@@ -2,10 +2,8 @@
 #include <vector>
 #include <sstream>
 
-ono::api kOnoApi {};
-
 INIT {
-    kOnoApi.init();
+    ono::_init_api();
     return MAKE_PLUGIN_INFO(
             Example, //插件名称
             1:0:0, //插件版本
@@ -46,7 +44,7 @@ OQ_MESSAGE {
  * @param callback 此参数用于插件加载拒绝理由  用法：写到内存（“拒绝理由”，OQ_信息回传文本指针_Out）
  */
 OQ_Event {
-    if(type == 1) {
+    if(ono::raw::Api_IsEnable() && type == 1) {
         auto index = kmp::find(content, "计算");
         if(index != kmp::npos) 
         {
@@ -54,13 +52,13 @@ OQ_Event {
             if(rpn::calculate(rpn::make(content + index), result))
             {
                 std::stringstream ss {};
-                ss << "计算结果：" << result;
+                ss << "~~计算结果：" << result;
                 
-                kOnoApi.send_msg(botQQ, type, " ", msgFrom, ss.str(), -1);
+                ono::raw::Api_SendMsg(botQQ, type, " ", msgFrom, ss.str().c_str(), -1);
             }
             else
             {
-                kOnoApi.send_msg(botQQ, type, " ", msgFrom, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
+                ono::raw::Api_SendMsg(botQQ, type, " ", msgFrom, "表达式错误，请检查您输入的表达式是否有误，且保证除数不能为0", -1);
             }
         }
     }
