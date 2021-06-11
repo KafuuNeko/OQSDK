@@ -27,8 +27,8 @@
 
 #define OQ_Event _OQ_EVENT(ono::Dispose, OQ_Event, 48)(\
     const char * botQQ, \
-    ono::MessageEvent type, \
-    int32_t subType, \
+    ono::MessageType type, \
+    ono::MessageType subType, \
     const char *msgFrom, \
     const char *iTObj, \
     const char *pTObj, \
@@ -43,3 +43,4 @@
 #define OQ_SetUp _OQ_EVENT(void, OQ_SetUp, 0)()
 
 #define OQ_DestroyPlugin _OQ_EVENT(int32_t, OQ_DestroyPlugin, 0)()
+

@@ -4,3 +4,5 @@
 #include <assert.h>
 #include <inttypes.h>
 #include <string>
+#include <sstream>
+#include <stdio.h>

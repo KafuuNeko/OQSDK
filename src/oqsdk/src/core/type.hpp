@@ -78,7 +78,7 @@ enum class GroupEvent : int32_t
     DisVideoRecv            = 223  //收到讨论组视频,可从消息中取出视频下载链接
 };
 
-enum class MessageEvent : int32_t
+enum class MessageType : int32_t
 {
     Undefined           = -1,   //OQ_未定义
     TempSession         = 0,    //OQ_在线临时会话
@@ -94,3 +94,5 @@ enum class MessageEvent : int32_t
 };
 
 }
+
+
