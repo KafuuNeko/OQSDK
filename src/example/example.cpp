@@ -23,7 +23,7 @@ APP_CREATE
         ono::raw::Api_OutPutLog("C++SDK");
 
         if(ono::raw::Api_IsEnable() && e.type == MessageType::Group) {
-            auto index = kmp::find(e.content.c_str(), "计算");
+            auto index = kmp::find(e.content, "计算");
             if(index != kmp::npos) 
             {
                 double result = 0;

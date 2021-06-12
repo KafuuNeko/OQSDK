@@ -3,17 +3,16 @@
 #include <string.h>
 #include <memory>
 
-std::unique_ptr<size_t[]> KMP_MakeNext(const char* substr, size_t len, bool optimize) noexcept
+std::unique_ptr<size_t[]> KMP_MakeNext(const std::string &substr, bool optimize) noexcept
 {
-	auto next = std::make_unique<size_t[]>(len);
+	auto next = std::make_unique<size_t[]>(substr.length());
 	next[0] = kmp::npos;
 
 	size_t j = 0;
 	size_t k = next[j];
 
-	while (j < len - 1)
+	while (j < substr.length() - 1)
 	{
-
 		if (k == kmp::npos || substr[j] == substr[k])
 		{
 			++j;
@@ -34,17 +33,15 @@ std::unique_ptr<size_t[]> KMP_MakeNext(const char* substr, size_t len, bool opti
 	return next;
 }
 
-size_t kmp::find(const char* findstr, const char* substr) noexcept
+size_t kmp::find(const std::string &findstr, const std::string &substr) noexcept
 {
-	size_t findLen = strlen(findstr), subsLen = strlen(substr);
+	if (substr.length() == 0 || findstr.length() < substr.length()) return kmp::npos;
 
-	if (subsLen == 0 || findLen < subsLen) return kmp::npos;
-
-	auto next = KMP_MakeNext(substr, subsLen, false);
+	auto next = KMP_MakeNext(substr, false);
 
 	size_t j = 0, k = 0;
 
-	while (j < findLen && (k == kmp::npos || k < subsLen))
+	while (j < findstr.length() && (k == kmp::npos || k < substr.length()))
 	{
 		if (k == kmp::npos || findstr[j] == substr[k])
 		{
@@ -57,21 +54,19 @@ size_t kmp::find(const char* findstr, const char* substr) noexcept
 			k = next[k];
 		}
 	}
-	return (k == subsLen) ? (j - k) : kmp::npos;
+	return (k == substr.length()) ? (j - k) : kmp::npos;
 }
 
-size_t kmp::find_count(const char* findstr, const char* substr) noexcept
+size_t kmp::find_count(const std::string &findstr, const std::string &substr) noexcept
 {
-	size_t findLen = strlen(findstr), subsLen = strlen(substr);
+	if (substr.length() == 0 || findstr.length() < substr.length()) return kmp::npos;
 
-	if (subsLen == 0 || findLen < subsLen) return kmp::npos;
-
-	auto next = KMP_MakeNext(substr, subsLen, false);
+	auto next = KMP_MakeNext(substr, false);
 
 	size_t count = 0;
 
 	size_t j = 0, k = 0;
-	while (j < findLen)
+	while (j < findstr.length())
 	{
 		if (k == kmp::npos || findstr[j] == substr[k])
 		{
@@ -80,7 +75,7 @@ size_t kmp::find_count(const char* findstr, const char* substr) noexcept
 			if (k == kmp::npos)		k = 0;
 			else					++k;
 
-			if (k == subsLen)
+			if (k == substr.length())
 			{
 				++count;
 				k = next[k - 1];
