@@ -6,3 +6,6 @@
 #include <string>
 #include <sstream>
 #include <stdio.h>
+#include <vector>
+#include <functional>
+

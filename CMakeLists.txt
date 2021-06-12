@@ -19,13 +19,14 @@ set(CMAKE_CXX_FLAGS "-m32 -fexec-charset=GBK")
 #强制静态链接并取消输出函数@后缀
 set(CMAKE_SHARED_LINKER_FLAGS "-static -Wl,--kill-at,--enable-stdcall-fixup")
 
-add_subdirectory(./src/oqsdk)
+set(CPPSDK_SRC_DIR ./src/oqsdk/src)
 
-aux_source_directory(./src/example DIR_SRCS)
-add_library(Example SHARED ${DIR_SRCS})
+set(PROJECT_DIR ./src/example)
 
-target_link_libraries(Example PUBLIC OQSDK_Utils)
-target_link_libraries(Example PUBLIC OQSDK_Core)
+# 递归搜索 core 和 utils 中的源文件
+file(GLOB_RECURSE _SOURCE_FILES ${PROJECT_DIR}/*.cpp ${CPPSDK_SRC_DIR}/core/*.cpp ${CPPSDK_SRC_DIR}/utils/*.cpp)
+
+add_library(Example SHARED ${_SOURCE_FILES})
 
 set_target_properties(Example PROPERTIES PREFIX "") # 去除 lib 前缀
 set_target_properties(Example PROPERTIES SUFFIX ".OQ.dll") # 添加后缀

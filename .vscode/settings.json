@@ -39,6 +39,8 @@
         "stdexcept": "cpp",
         "streambuf": "cpp",
         "cinttypes": "cpp",
-        "*.inc": "cpp"
+        "*.inc": "cpp",
+        "functional": "cpp",
+        "iterator": "cpp"
     }
 }
