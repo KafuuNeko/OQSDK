@@ -6,10 +6,10 @@
 #include <math.h>
 
 /**
-** è½¬æ¢ä»»æ„16ä½åŠå…¶16ä½ä»¥ä¸‹çš„è¿›åˆ¶ä¸ºåè¿›åˆ¶æ•°
-** @param str_beg èµ·å§‹è¿­ä»£å™¨
-** @param str_end ç»“æŸè¿­ä»£å™¨
-** @param bit è¿›åˆ¶ï¼ˆ2-16ï¼‰
+** ×ª»»ÈÎÒâ16Î»¼°Æä16Î»ÒÔÏÂµÄ½øÖÆÎªÊ®½øÖÆÊı
+** @param str_beg ÆğÊ¼µü´úÆ÷
+** @param str_end ½áÊøµü´úÆ÷
+** @param bit ½øÖÆ£¨2-16£©
 */
 template <class _iter>
 static int64_t to_dec(_iter str_beg, _iter str_end, int bit) noexcept
@@ -40,23 +40,23 @@ static int64_t to_dec(_iter str_beg, _iter str_end, int bit) noexcept
 }
 
 /**
-** åˆ¤æ–­å­—ç¬¦æ˜¯å¦æ˜¯å’Œæ•°å­—æœ‰å…³çš„å­—ç¬¦
-** @param ch è¾“å…¥å­—ç¬¦
-** @return æœ‰å…³è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+** ÅĞ¶Ï×Ö·ûÊÇ·ñÊÇºÍÊı×ÖÓĞ¹ØµÄ×Ö·û
+** @param ch ÊäÈë×Ö·û
+** @return ÓĞ¹Ø·µ»Øtrue£¬·ñÔò·µ»Øfalse
 */
 constexpr bool is_number_char(char ch) noexcept
 {
-	return (ch >= '0' && ch <= '9')	   //æ˜¯æ•°å­—
-		|| (ch >= 'a' && ch <= 'f') //æ˜¯å¦æ˜¯åå…­è¿›åˆ¶å­—ç¬¦
-		|| (ch >= 'A' && ch <= 'F') //æ˜¯å¦æ˜¯åå…­è¿›åˆ¶å­—ç¬¦
-		|| (ch == 'O' || ch == 'H') //æ˜¯å¦æ˜¯ä½æ ‡è®°ç¬¦ï¼ˆæ ‡è®°ç¬¦Bå·²ç»åœ¨åˆ¤æ–­æ˜¯å¦åå…­ä½çš„æ—¶å€™åˆ¤æ–­äº†ï¼‰
-		|| (ch == '.');			   //æ˜¯å¦æ˜¯å°æ•°ç‚¹
+	return (ch >= '0' && ch <= '9')	   //ÊÇÊı×Ö
+		|| (ch >= 'a' && ch <= 'f') //ÊÇ·ñÊÇÊ®Áù½øÖÆ×Ö·û
+		|| (ch >= 'A' && ch <= 'F') //ÊÇ·ñÊÇÊ®Áù½øÖÆ×Ö·û
+		|| (ch == 'O' || ch == 'H') //ÊÇ·ñÊÇÎ»±ê¼Ç·û£¨±ê¼Ç·ûBÒÑ¾­ÔÚÅĞ¶ÏÊÇ·ñÊ®ÁùÎ»µÄÊ±ºòÅĞ¶ÏÁË£©
+		|| (ch == '.');			   //ÊÇ·ñÊÇĞ¡Êıµã
 }
 
 /**
-** å°†æ•°å­—ç¼“å†²åŒºçš„å†…å®¹è½¬æ¢åˆ°doubleæ•°æ®
-** @param buf ç¼“å†²åŒºæŒ‡é’ˆ
-** @param sz ç¼“å†²åŒºæœ‰æ•ˆæ•°æ®
+** ½«Êı×Ö»º³åÇøµÄÄÚÈİ×ª»»µ½doubleÊı¾İ
+** @param buf »º³åÇøÖ¸Õë
+** @param sz »º³åÇøÓĞĞ§Êı¾İ
 */
 inline double to_double(const std::string& buf) noexcept
 {
@@ -78,8 +78,8 @@ inline double to_double(const std::string& buf) noexcept
 }
 
 /**
-** è¾…åŠ©å‡½æ•°ï¼Œç”¨äºå–ä¸¤ä¸ªæ ˆé¡¶å…ƒç´ 
-** @return è‹¥stacké‡Œçš„å…ƒç´ ä¸è¶³ä¸¤ä¸ªï¼Œåˆ™è¿”å›falseè¡¨ç¤ºè·å–å¤±è´¥*/
+** ¸¨Öúº¯Êı£¬ÓÃÓÚÈ¡Á½¸öÕ»¶¥ÔªËØ
+** @return ÈôstackÀïµÄÔªËØ²»×ãÁ½¸ö£¬Ôò·µ»Øfalse±íÊ¾»ñÈ¡Ê§°Ü*/
 template <typename T>
 inline bool rpn_top2(std::stack<T>& rpn, T& e, T& s) noexcept
 {
@@ -97,9 +97,9 @@ inline bool rpn_top2(std::stack<T>& rpn, T& e, T& s) noexcept
 }
 
 /**
-** åˆ¤æ–­å­—ç¬¦æ˜¯å¦ä¸ºæ•°å­¦æ“ä½œç¬¦
-** @param ch è¦åˆ¤æ–­çš„å­—ç¬¦
-** @return è‹¥ä¸ºæ•°å­¦æ“ä½œç¬¦åˆ™è¿”å›trueï¼Œå¦åˆ™è¿”å›false
+** ÅĞ¶Ï×Ö·ûÊÇ·ñÎªÊıÑ§²Ù×÷·û
+** @param ch ÒªÅĞ¶ÏµÄ×Ö·û
+** @return ÈôÎªÊıÑ§²Ù×÷·ûÔò·µ»Øtrue£¬·ñÔò·µ»Øfalse
 */
 constexpr bool is_math_notation(char ch) noexcept
 {
@@ -107,9 +107,9 @@ constexpr bool is_math_notation(char ch) noexcept
 }
 
 /**
-** è·å–æŒ‡å®šæ“ä½œç¬¦ä¼˜å…ˆçº§
-** @param ch æ•°å­¦æ“ä½œç¬¦å­—ç¬¦
-** @return ä¼˜å…ˆçº§
+** »ñÈ¡Ö¸¶¨²Ù×÷·ûÓÅÏÈ¼¶
+** @param ch ÊıÑ§²Ù×÷·û×Ö·û
+** @return ÓÅÏÈ¼¶
 */
 constexpr int get_math_notation_priority(char ch) noexcept
 {
@@ -125,10 +125,10 @@ constexpr int get_math_notation_priority(char ch) noexcept
 }
 
 /**
-** è®¡ç®—é€†æ³¢å…°è¡¨è¾¾å¼
-** @param rpn_exp é€†æ³¢å…°è¡¨è¾¾å¼ä¸²
-** @param exp_len é€†æ³¢å…°è¡¨è¾¾å¼ä¸²çš„é•¿åº¦
-** @return è¿”å›æœ€ç»ˆè®¡ç®—ç»“æœ */
+** ¼ÆËãÄæ²¨À¼±í´ïÊ½
+** @param rpn_exp Äæ²¨À¼±í´ïÊ½´®
+** @param exp_len Äæ²¨À¼±í´ïÊ½´®µÄ³¤¶È
+** @return ·µ»Ø×îÖÕ¼ÆËã½á¹û */
 bool rpn::calculate(const std::string& rpn_exp, double & result) noexcept
 {
 	std::stack<double> rpn;
@@ -138,7 +138,7 @@ bool rpn::calculate(const std::string& rpn_exp, double & result) noexcept
 	{
 		if (*iter == ' ')
 		{
-			//é‡åˆ°ç©ºæ ¼ï¼Œä¸”æ•°å­—ç¼“å†²åŒºå†…æœ‰æ•°æ®åˆ™è½¬æ¢è½¬æ¢æ•°å­—ç¼“å†²åŒºå†…çš„æ•°æ®æˆDoubleç±»å‹ï¼Œå¹¶å…¥æ ˆ
+			//Óöµ½¿Õ¸ñ£¬ÇÒÊı×Ö»º³åÇøÄÚÓĞÊı¾İÔò×ª»»×ª»»Êı×Ö»º³åÇøÄÚµÄÊı¾İ³ÉDoubleÀàĞÍ£¬²¢ÈëÕ»
 			if (!number_buf.empty())
 			{
 				rpn.push(to_double(number_buf));
@@ -147,57 +147,57 @@ bool rpn::calculate(const std::string& rpn_exp, double & result) noexcept
 		}
 		else if (is_number_char(*iter))
 		{
-			//åŠ å…¥åˆ°æ•°å­—ç¼“å†²åŒº
+			//¼ÓÈëµ½Êı×Ö»º³åÇø
 			number_buf.push_back(*iter);
 		}
 		else
 		{
-			//eæ˜¯stackç¬¬ä¸€æ¬¡å¼¹å‡ºçš„å€¼ï¼Œsæ˜¯stackç¬¬äºŒæ¬¡å¼¹å‡ºçš„å€¼
+			//eÊÇstackµÚÒ»´Îµ¯³öµÄÖµ£¬sÊÇstackµÚ¶ş´Îµ¯³öµÄÖµ
 			double s, e;
 			switch (*iter)
 			{
 			case '+':
 				if (!rpn_top2(rpn, e, s))
-					return false; //è¡¨è¾¾å¼é”™è¯¯
+					return false; //±í´ïÊ½´íÎó
 				rpn.push(s + e);
 				break;
 
 			case '-':
 				if (!rpn_top2(rpn, e, s))
-					return false; //è¡¨è¾¾å¼é”™è¯¯
+					return false; //±í´ïÊ½´íÎó
 				rpn.push(s - e);
 				break;
 
 			case '*':
 				if (!rpn_top2(rpn, e, s))
-					return false; //è¡¨è¾¾å¼é”™è¯¯
+					return false; //±í´ïÊ½´íÎó
 				rpn.push(s * e);
 				break;
 
 			case '/':
 				if (!rpn_top2(rpn, e, s) || e == 0)
-					return false; //é™¤æ•°ä¸èƒ½ä¸º0
+					return false; //³ıÊı²»ÄÜÎª0
 				rpn.push(s / e);
 				break;
 
 			case '%':
 				if (!rpn_top2(rpn, e, s) || e == 0)
-					return false; //é™¤æ•°ä¸èƒ½ä¸º0
+					return false; //³ıÊı²»ÄÜÎª0
 				rpn.push(static_cast<double>(static_cast<int64_t>(s) % static_cast<int64_t>(e)));
 				break;
 
 			case '^':
 				if (!rpn_top2(rpn, e, s))
-					return false; //è¡¨è¾¾å¼é”™è¯¯
+					return false; //±í´ïÊ½´íÎó
 				rpn.push(pow(s, e));
 				break;
 			}
 		}
 	}
 
-	//å¦‚æœè®¡ç®—å®Œæ¯•åstackå‰©ä½™çš„æˆå‘˜æ•°ä¸ä¸º1åˆ™å¤±è´¥
+	//Èç¹û¼ÆËãÍê±ÏºóstackÊ£ÓàµÄ³ÉÔ±Êı²»Îª1ÔòÊ§°Ü
 	if (rpn.size() != 1)
-		return false; //è¡¨è¾¾å¼é”™è¯¯
+		return false; //±í´ïÊ½´íÎó
 
 	result = rpn.top();
 
@@ -205,11 +205,11 @@ bool rpn::calculate(const std::string& rpn_exp, double & result) noexcept
 }
 
 /**
-** è¾…åŠ©å‡½æ•° å¤„ç†æ–°å­—ç¬¦
-** åœ¨å°†æ•°å­¦è¡¨è¾¾å¼æ„é€ ä¸ºé€†æ³¢å…°è¡¨è¾¾å¼æ—¶å¤„ç†æ–°æ•°å­¦æ“ä½œç¬¦æ—¶è°ƒç”¨
-** @param result ç»“æœ
-** @param notation è¿ç®—ç¬¦Stack
-** @param new_ch æ–°å­—ç¬¦
+** ¸¨Öúº¯Êı ´¦ÀíĞÂ×Ö·û
+** ÔÚ½«ÊıÑ§±í´ïÊ½¹¹ÔìÎªÄæ²¨À¼±í´ïÊ½Ê±´¦ÀíĞÂÊıÑ§²Ù×÷·ûÊ±µ÷ÓÃ
+** @param result ½á¹û
+** @param notation ÔËËã·ûStack
+** @param new_ch ĞÂ×Ö·û
 */
 static void make_rpn_dispose_new_char(std::string& result, std::stack<char>& notation, char new_ch) noexcept
 {
@@ -217,12 +217,12 @@ static void make_rpn_dispose_new_char(std::string& result, std::stack<char>& not
 
 	while (!notation.empty())
 	{
-		//ç‰¹æ®Šæƒ…å†µï¼Œ^æ“ä½œç¬¦è¿ç®—é¡ºåºæ˜¯ä»å³åˆ°å·¦
+		//ÌØÊâÇé¿ö£¬^²Ù×÷·ûÔËËãË³ĞòÊÇ´ÓÓÒµ½×ó
 		if (new_ch == '^' && new_ch == notation.top()) break;
-		//å¦‚æœå½“å‰é¡¶æ ˆè¿ç®—ç¬¦ä¼˜å…ˆçº§ä½äºæ–°è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼Œåˆ™ç»“æŸå¾ªç¯
+		//Èç¹ûµ±Ç°¶¥Õ»ÔËËã·ûÓÅÏÈ¼¶µÍÓÚĞÂÔËËã·ûÓÅÏÈ¼¶£¬Ôò½áÊøÑ­»·
 		if (get_math_notation_priority(notation.top()) < priority) break;
 
-		//é¡¶æ ˆè¿ç®—ç¬¦ä¼˜å…ˆçº§å¤§äºæ–°è¿ç®—ç¬¦ä¼˜å…ˆçº§ï¼Œæ ¹æ®è§„åˆ™ï¼Œä¼˜å…ˆçº§é«˜äºç­‰äºçš„çš„å…¨éƒ¨å‡ºæ ˆ
+		//¶¥Õ»ÔËËã·ûÓÅÏÈ¼¶´óÓÚĞÂÔËËã·ûÓÅÏÈ¼¶£¬¸ù¾İ¹æÔò£¬ÓÅÏÈ¼¶¸ßÓÚµÈÓÚµÄµÄÈ«²¿³öÕ»
 		result.push_back(notation.top());
 		result.push_back(' ');
 		notation.pop();
@@ -232,10 +232,10 @@ static void make_rpn_dispose_new_char(std::string& result, std::stack<char>& not
 }
 
 /**
-** å°†ä¸€ä¸ªæ•°å­¦è¡¨è¾¾å¼æ„é€ ä¸ºé€†æ³¢å…°è¡¨è¾¾å¼
-** @param _math_exp è¡¨è¾¾å¼ä¸²
-** @param _exp_len è¡¨è¾¾å¼ä¸²çš„é•¿åº¦
-** @return è¿”å›é€†æ³¢å…°è¡¨è¾¾å¼ */
+** ½«Ò»¸öÊıÑ§±í´ïÊ½¹¹ÔìÎªÄæ²¨À¼±í´ïÊ½
+** @param _math_exp ±í´ïÊ½´®
+** @param _exp_len ±í´ïÊ½´®µÄ³¤¶È
+** @return ·µ»ØÄæ²¨À¼±í´ïÊ½ */
 std::string rpn::make(const std::string& math_exp) noexcept
 {
 	bool first = true;
@@ -249,10 +249,10 @@ std::string rpn::make(const std::string& math_exp) noexcept
 		if (*iter == ' ')
 			continue;
 
-		//å¼€å¤´ç¬¬ä¸€ä¸ªæœ‰æ•ˆç¬¦å·
+		//¿ªÍ·µÚÒ»¸öÓĞĞ§·ûºÅ
 		if (first)
 		{
-			//å¦‚æœå¼€å¤´ç¬¬ä¸€ä¸ªæœ‰æ•ˆç¬¦å·æ˜¯+æˆ–è€…-ï¼Œåˆ™åœ¨å¼€å¤´è¡¥ä¸€ä¸ª0
+			//Èç¹û¿ªÍ·µÚÒ»¸öÓĞĞ§·ûºÅÊÇ+»òÕß-£¬ÔòÔÚ¿ªÍ·²¹Ò»¸ö0
 			if (*iter == '-' || *iter == '+')
 			{
 				result.push_back('0');
@@ -262,7 +262,7 @@ std::string rpn::make(const std::string& math_exp) noexcept
 			first = false;
 		}
 
-		//ç”¨äºæ ‡è¯†æ˜¯å¦è¿½åŠ è¿‡æ•°å­—ï¼Œè‹¥è¿½åŠ è¿‡æ•°å­—ï¼Œåˆ™éœ€è¦åœ¨å®Œæˆååœ¨æœ«å°¾æ’å…¥ç©ºæ ¼
+		//ÓÃÓÚ±êÊ¶ÊÇ·ñ×·¼Ó¹ıÊı×Ö£¬Èô×·¼Ó¹ıÊı×Ö£¬ÔòĞèÒªÔÚÍê³ÉºóÔÚÄ©Î²²åÈë¿Õ¸ñ
 		bool flag = false;
 
 		while (is_number_char(*iter) || *iter == ' ')
@@ -277,7 +277,7 @@ std::string rpn::make(const std::string& math_exp) noexcept
 				break;
 		}
 
-		if (flag) //å¦‚æœè¿½åŠ è¿‡æ•°å­—ï¼Œåˆ™åœ¨ç»“æœå°¾éƒ¨åŠ å…¥ç©ºæ ¼
+		if (flag) //Èç¹û×·¼Ó¹ıÊı×Ö£¬ÔòÔÚ½á¹ûÎ²²¿¼ÓÈë¿Õ¸ñ
 			result.push_back(' ');
 
 		if (iter == iter_end)
@@ -285,22 +285,22 @@ std::string rpn::make(const std::string& math_exp) noexcept
 
 		if (*iter == ')')
 		{
-			//å¦‚æœé‡åˆ°å³æ‹¬å·ï¼Œåˆ™ä¸æ–­å¼¹å‡ºæ•°å­¦æ“ä½œç¬¦æ ˆä¸­ç¬¦å·ï¼Œç›´åˆ°é‡åˆ°å·¦æ‹¬å·æˆ–å…¨éƒ¨å¼¹å‡º
+			//Èç¹ûÓöµ½ÓÒÀ¨ºÅ£¬Ôò²»¶Ïµ¯³öÊıÑ§²Ù×÷·ûÕ»ÖĞ·ûºÅ£¬Ö±µ½Óöµ½×óÀ¨ºÅ»òÈ«²¿µ¯³ö
 			while (!notation.empty())
 			{
 				char top_ch = notation.top();
 				notation.pop();
-				//é‡åˆ°å·¦æ‹¬å·ï¼Œé€€å‡ºå¾ªç¯
+				//Óöµ½×óÀ¨ºÅ£¬ÍË³öÑ­»·
 				if (top_ch == '(')
 					break;
-				//å°†å¼¹å‡ºçš„å†…å®¹è¾“å‡ºåˆ°ç»“æœ
+				//½«µ¯³öµÄÄÚÈİÊä³öµ½½á¹û
 				result.push_back(top_ch);
 				result.push_back(' ');
 			}
 		}
 		else if (*iter == '(')
 		{
-			//å³æ‹¬å·ï¼Œæ— æ¡ä»¶ç›´æ¥åŠ å…¥
+			//ÓÒÀ¨ºÅ£¬ÎŞÌõ¼şÖ±½Ó¼ÓÈë
 			notation.push(*iter);
 		}
 		else if (is_math_notation(*iter))
@@ -309,7 +309,7 @@ std::string rpn::make(const std::string& math_exp) noexcept
 		}
 	}
 
-	//å¤„ç†å®Œè¡¨è¾¾å¼å­—ç¬¦ä¸²åï¼Œå¦‚æœæ ˆå†…è¿˜æœ‰æ®‹ç•™æ•°æ®ï¼Œé‚£ä¹ˆä¾æ¬¡å‡ºæ ˆï¼ŒåŠ å…¥åˆ°ç»“æœ
+	//´¦ÀíÍê±í´ïÊ½×Ö·û´®ºó£¬Èç¹ûÕ»ÄÚ»¹ÓĞ²ĞÁôÊı¾İ£¬ÄÇÃ´ÒÀ´Î³öÕ»£¬¼ÓÈëµ½½á¹û
 	while (!notation.empty())
 	{
 		result.push_back(notation.top());
