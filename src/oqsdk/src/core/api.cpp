@@ -31,6 +31,17 @@ void _init_api() noexcept(false)
 }
 
 /**
+ * @brief 判断插件是否启动
+ * 
+ * @return true 启动
+ * @return false 未启动
+ */
+bool is_enable()
+{
+    return raw::Api_IsEnable();
+}
+
+/**
  * @brief 发送普通文本消息
  * 
  * @param bot 机器人QQ
@@ -52,5 +63,16 @@ void send_msg(const std::string &bot,
     raw::Api_SendMsgEx(bot.c_str(), (anonymity ? 2 : 1), msgType, group.c_str(), qq.c_str(), content.c_str(), bubble);
 }
 
+/**
+ * @brief 发送日志消息
+ * 
+ * @param message 日志消息内容
+ */
+void out_put_log(const std::string &message) 
+{
+    raw::Api_OutPutLog(message.c_str());
 }
+
+}
+
 
